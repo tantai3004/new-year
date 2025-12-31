@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Năm Mới 2025 ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           PHẦN CẤU HÌNH - CHỈNH SỬA Ở ĐÂY
+           ============================================ */
+        :root {
+            /* Màu sắc chủ đạo */
+            --color-primary: #d4a574;
+            --color-secondary: #f4e4d7;
+            --color-accent: #ff6b9d;
+            --color-text: #2c1810;
+            --color-white: #ffffff;
+            
+            /* Gradient nền */
+            --gradient-bg: linear-gradient(135deg, 
+                #fff5f0 0%, 
+                #ffe6e6 25%, 
+                #fff0e6 50%, 
+                #ffe6f0 75%, 
+                #fff5f5 100%);
+        }
+
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--gradient-bg);
+            color: var(--color-text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ============================================
+           CANVAS PHÁO HOA
+           ============================================ */
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ============================================
+           CONTAINER CHÍNH
+           ============================================ */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease-in;
+        }
+
+        .main-container.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ============================================
+           COUNTDOWN
+           ============================================ */
+        .countdown-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .countdown-container.hidden {
+            display: none;
+        }
+
+        .countdown-number {
+            font-family: 'Dancing Script', cursive;
+            font-size: 15rem;
+            font-weight: 700;
+            color: var(--color-white);
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 107, 157, 0.6),
+                0 0 60px rgba(255, 107, 157, 0.4),
+                0 0 80px rgba(255, 107, 157, 0.2);
+            animation: countdownPulse 1s ease-out;
+        }
+
+        @keyframes countdownPulse {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ============================================
+           HAPPY NEW YEAR MESSAGE
+           ============================================ */
+        .happy-new-year {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 998;
+        }
+
+        .happy-new-year.show {
+            display: flex;
+        }
+
+        .happy-new-year-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 6rem;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(135deg, #ff6b9d, #ffd93d, #d4a574, #ff8fab);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            animation: happyNewYearEnter 1s ease-out, happyNewYearGlow 2s ease-in-out infinite 1s;
+        }
+
+        @keyframes happyNewYearEnter {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes happyNewYearGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(255, 107, 157, 0.8));
+            }
+        }
+
+        /* ============================================
+           HEADER - TIÊU ĐỀ CHÍNH
+           ============================================ */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out 0.5s forwards;
+        }
+
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.4),
+                         0 0 40px rgba(255, 107, 157, 0.2);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--color-text);
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        /* ============================================
+           CONTENT - NỘI DUNG LỜI CHÚC
+           ============================================ */
+        .content {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out 1s forwards;
+            border: 2px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .message {
+            font-size: 1.3rem;
+            line-height: 2;
+            text-align: center;
+            color: var(--color-text);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        /* ============================================
+           NÚT BẤM
+           ============================================ */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--color-accent), #ff8fab);
+            color: var(--color-white);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--color-primary), #e0b887);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 15px 40px rgba(212, 165, 116, 0.4);
+        }
+
+        /* ============================================
+           MODAL POPUP
+           ============================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background: var(--color-white);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: transparent;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--color-text);
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+            line-height: 1;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .modal-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--color-accent);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .modal-content {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: var(--color-text);
+            text-align: left;
+        }
+
+        .modal-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* ============================================
+           HIỆU ỨNG TRÁI TIM
+           ============================================ */
+        .heart {
+            position: fixed;
+            color: var(--color-accent);
+            font-size: 2rem;
+            pointer-events: none;
+            animation: floatHeart 3s ease-in forwards;
+            z-index: 999;
+            opacity: 0;
+        }
+
+        /* ============================================
+           NÚT ÂM THANH
+           ============================================ */
+        .audio-control {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--color-primary);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            font-size: 1.5rem;
+        }
+
+        .audio-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(255, 107, 157, 0.4),
+                             0 0 40px rgba(255, 107, 157, 0.2);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(255, 107, 157, 0.6),
+                             0 0 60px rgba(255, 107, 157, 0.4);
+            }
+        }
+
+        @keyframes floatHeart {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE - MOBILE
+           ============================================ */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 2rem 1.5rem;
+            }
+
+            .message {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+
+            .btn {
+                padding: 0.9rem 2rem;
+                font-size: 1rem;
+            }
+
+            .modal {
+                padding: 2rem 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.7rem;
+            }
+
+            .modal-content {
+                font-size: 1.1rem;
+            }
+
+            .audio-control {
+                width: 50px;
+                height: 50px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .main-title {
+                font-size: 1.7rem;
+            }
+
+            .content {
+                padding: 1.5rem 1rem;
+            }
+
+            .message {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .countdown-number {
+                font-size: 10rem;
+            }
+
+            .happy-new-year-text {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Canvas cho hiệu ứng pháo hoa -->
+    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- Countdown Container -->
+    <div class="countdown-container" id="countdownContainer">
+        <div class="countdown-number" id="countdownNumber">3</div>
+    </div>
+
+    <!-- Happy New Year Message -->
+    <div class="happy-new-year" id="happyNewYear">
+        <div class="happy-new-year-text">Happy New Year! 🎉</div>
+    </div>
+
+    <!-- Container chính -->
+    <div class="main-container" id="mainContainer">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="main-title">Chúc mừng năm mới, cô gái đặc biệt của tuiii ✨</h1>
+            <p class="subtitle">2025 - Khép lại 1 năm đầy đặc sắc</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <p class="message">
+                Mong rằng năm mới sẽ mang đến cho em thật nhiều niềm vui, sức khỏe,
+                những nụ cười rạng rỡ và những điều dịu dàng nhất.
+                Cảm ơn em vì đã làm cho năm cũ của anh trở nên thật đặc biệt.
+            </p>
+
+            <div class="button-container">
+                <button class="btn" onclick="openModal()">
+                    <span>💌</span> Một điều muốn nói…
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <h2 class="modal-title">Gửi em... 💕</h2>
+            <div class="modal-content" id="modalContent">
+                <!-- Nội dung này được cấu hình trong phần JavaScript bên dưới -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Nút điều khiển âm thanh -->
+    <div class="audio-control" onclick="toggleAudio()" id="audioControl">
+        🔇
+    </div>
+
+    <!-- Audio element -->
+    <audio id="bgMusic" loop>
+        <!-- Link nhạc nền - Có thể thay đổi ở đây -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        /* ============================================
+           PHẦN CẤU HÌNH - CHỈNH SỬA Ở ĐÂY
+           ============================================ */
+        
+        // Cấu hình nội dung lời chúc trong modal
+        const MODAL_MESSAGE = `
+            <p>Cổ ơi,</p>
+            
+            <p>Năm cũ đã qua với biết bao chuyện mà cổ gặp phải, nhưng anh tin cổ là 1 cô gái đầy mạnh mẽ là giỏi giang, nên là không có vấn đề gì với cổ cả và cũng nhờ có em mà làm cho em 1 năm chẳng có gì trờ nên đặc sắc hơn, thú vị hơn và vui vẻ hơn.</p>
+            
+            <p>Năm mới này, anh mong rằng em sẽ luôn được hạnh phúc, luôn rạng rỡ như mặt trời luôn toả nắng như hướng dương lun hướng về nơi có ánh sáng và luôn luôn xinh đẹp như những bông hoa. Dù cuộc sống có những lúc khó khăn, anh tin rằng nụ cười của em sẽ là ánh sáng xua tan mọi bóng tối.</p>
+            
+            <p>Cảm ơn em vì đã thích anh, vì đã cho anh năng lượng và niềm vui. Cổ là người tuyệt vời nhất mà đã cho anh tìm thấy được.</p>
+            
+            <p>Chúc em một năm mới tràn đầy tiếng cười, tràn đầy yêu thương và thành công trong mọi điều em mong muốn. Anh sẽ luôn ở đây, đợi em, trong mọi chặng đường phía trước.</p>
+            
+            <p style="text-align: right; margin-top: 2rem; font-style: italic;">Người chiếm vị trí đặt biệt trong tim tuiii ❤️</p>
+        `;
+
+        // Cấu hình nhạc nền
+        const BACKGROUND_MUSIC = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+        // Bạn có thể thay link nhạc ở đây. Một số gợi ý:
+        // - Sử dụng link từ Google Drive (công khai)
+        // - Sử dụng link từ Dropbox
+        // - Hoặc upload file nhạc lên cùng thư mục với index.html
+
+        /* ============================================
+           FIREWORKS - HIỆU ỨNG PHÁO HOA
+           ============================================ */
+        const canvas = document.getElementById('fireworks-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Thiết lập kích thước canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Mảng lưu các hạt pháo hoa
+        const particles = [];
+
+        // Class cho mỗi hạt pháo hoa
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                const speed = Math.random() * 10 + 5;
+                const angle = Math.random() * Math.PI * 2;
+                this.velocity = {
+                    x: Math.cos(angle) * speed,
+                    y: Math.sin(angle) * speed
+                };
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.01;
+                this.size = Math.random() * 3 + 2;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            update() {
+                this.velocity.y += 0.15;
+                this.velocity.x *= 0.98; // Air resistance
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= this.decay;
+            }
+        }
+
+        // Tạo pháo hoa (tăng số hạt lên 80 cho mỗi pháo hoa)
+        function createFirework(x, y) {
+            const colors = ['#ff6b9d', '#ffd93d', '#d4a574', '#ff8fab', '#ffb3c6', '#ff6b35', '#f7b801', '#4ecdc4', '#ffe66d', '#ff6b9d'];
+            const particleCount = 80;
+            for (let i = 0; i < particleCount; i++) {
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particles.push(new Particle(x, y, color));
+            }
+        }
+
+        // Tạo nhiều pháo hoa cùng lúc (bùng nổ lớn)
+        function createMassiveFireworks() {
+            const fireworkCount = 20; // Tăng lên 20 pháo hoa mỗi lần
+            for (let i = 0; i < fireworkCount; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height * 0.6 + canvas.height * 0.1;
+                    createFirework(x, y);
+                }, i * 50); // Giảm delay để pháo hoa bắn nhanh hơn
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.fillStyle = 'rgba(255, 245, 240, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Lặp ngược để tránh lỗi khi splice
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const particle = particles[i];
+                if (particle.alpha <= 0) {
+                    particles.splice(i, 1);
+                } else {
+                    particle.update();
+                    particle.draw();
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Biến để điều khiển pháo hoa ngẫu nhiên
+        let randomFireworksInterval = null;
+
+        // Hàm bắt đầu pháo hoa ngẫu nhiên (sau khi countdown xong)
+        function startRandomFireworks() {
+            if (randomFireworksInterval) return;
+            randomFireworksInterval = setInterval(() => {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height * 0.7;
+                createFirework(x, y);
+            }, 800); // Giảm interval để pháo hoa nhiều hơn
+        }
+
+        // Hàm dừng pháo hoa ngẫu nhiên
+        function stopRandomFireworks() {
+            if (randomFireworksInterval) {
+                clearInterval(randomFireworksInterval);
+                randomFireworksInterval = null;
+            }
+        }
+
+        /* ============================================
+           MODAL FUNCTIONS
+           ============================================ */
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContent = document.getElementById('modalContent');
+
+        // Điền nội dung vào modal
+        modalContent.innerHTML = MODAL_MESSAGE;
+
+        function openModal() {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            createHearts();
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOnOverlay(event) {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        }
+
+        // Đóng modal khi nhấn ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        /* ============================================
+           HEARTS ANIMATION
+           ============================================ */
+        function createHearts() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    heart.style.opacity = '1';
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }, i * 200);
+            }
+        }
+
+        /* ============================================
+           AUDIO CONTROL
+           ============================================ */
+        const audio = document.getElementById('bgMusic');
+        const audioControl = document.getElementById('audioControl');
+        let isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                audioControl.textContent = '🔇';
+                isPlaying = false;
+            } else {
+                audio.play().catch(e => {
+                    console.log('Không thể phát nhạc tự động:', e);
+                });
+                audioControl.textContent = '🔊';
+                isPlaying = true;
+            }
+        }
+
+        // Tự động phát nhạc khi có tương tác đầu tiên
+        let firstInteraction = true;
+        document.addEventListener('click', () => {
+            if (firstInteraction) {
+                firstInteraction = false;
+                // Không tự động phát, để người dùng chủ động
+            }
+        }, { once: true });
+
+        /* ============================================
+           COUNTDOWN & HAPPY NEW YEAR
+           ============================================ */
+        const countdownContainer = document.getElementById('countdownContainer');
+        const countdownNumber = document.getElementById('countdownNumber');
+        const happyNewYear = document.getElementById('happyNewYear');
+        const mainContainer = document.getElementById('mainContainer');
+
+        // Hàm countdown và hiển thị pháo hoa
+        function startCountdown() {
+            let count = 3;
+            
+            function updateCountdown() {
+                if (count > 0) {
+                    countdownNumber.textContent = count;
+                    countdownNumber.style.animation = 'none';
+                    // Trigger reflow để animation chạy lại
+                    setTimeout(() => {
+                        countdownNumber.style.animation = 'countdownPulse 1s ease-out';
+                    }, 10);
+                    count--;
+                    setTimeout(updateCountdown, 1000);
+                } else {
+                    // Ẩn countdown
+                    countdownContainer.classList.add('hidden');
+                    
+                    // Bắn pháo hoa lớn
+                    createMassiveFireworks();
+                    // Bắn thêm nhiều lần nữa
+                    setTimeout(() => createMassiveFireworks(), 500);
+                    setTimeout(() => createMassiveFireworks(), 1000);
+                    setTimeout(() => createMassiveFireworks(), 1500);
+                    setTimeout(() => createMassiveFireworks(), 2000);
+                    
+                    // Hiển thị Happy New Year sau 1.5 giây
+                    setTimeout(() => {
+                        happyNewYear.classList.add('show');
+                        
+                        // Sau 3 giây, ẩn Happy New Year và hiện nội dung chính
+                        setTimeout(() => {
+                            happyNewYear.classList.remove('show');
+                            mainContainer.classList.add('show');
+                            startRandomFireworks(); // Bắt đầu pháo hoa ngẫu nhiên
+                        }, 3000);
+                    }, 1500);
+                }
+            }
+            
+            updateCountdown();
+        }
+
+        // Bắt đầu countdown khi trang load
+        window.addEventListener('load', () => {
+            stopRandomFireworks(); // Đảm bảo không có pháo hoa ngẫu nhiên lúc đầu
+            startCountdown();
+        });
+
+        /* ============================================
+           CONSOLE MESSAGE
+           ============================================ */
+        console.log('%c💕 Chúc mừng năm mới! 💕', 
+            'font-size: 20px; color: #ff6b9d; font-weight: bold;');
+        console.log('%cTrang web được tạo với tình yêu ❤️', 
+            'font-size: 14px; color: #d4a574;');
+    </script>
+</body>
+</html>
